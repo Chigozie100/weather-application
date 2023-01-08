@@ -1,0 +1,82 @@
+<div class="card" style="width: 400px; height: 80vh">
+  <div class="upper-data">
+    <img class="card-img-top" src="../assets/sunny.webp" *ngIf="14 > 15" />
+    <img class="card-img-top" src="../assets/cloudy.jpeg" *ngIf="14 <= 15" />
+
+    <div class="weather-data">
+      <div class="location" *ngIf="weatherInfo">{{ weatherInfo.timezone }}</div>
+      <div class="temperature">
+        {{ weatherInfo.current_weather.temperature | number : "1.0-0" }}°C
+      </div>
+    </div>
+  </div>
+  <div class="flex flex-col mx-auto justify-center lower-data pl-2">
+    <div class="h3 text-white text-center mt-2">More information</div>
+
+    <div *ngIf="weatherInfo">
+      <div class="content mt-2">
+        <p class="paragraph text-white">
+          Date: {{ weatherInfo.current_weather.time.substring(0, 10) }}
+        </p>
+        <p class="paragraph text-white">
+          Current Time {{ currentTime }} {{ hourDenomination }}
+        </p>
+      </div>
+      <div class="content d-flex mt-2">
+        <p class="text-white">Wind Speed:</p>
+        <p class="paragraph text-white">
+          {{ weatherInfo.current_weather.windspeed}}
+        </p>
+      </div>
+    </div>
+    <form>
+      <div class="form-group">
+        <label class="mb-3"
+          >Select Continent
+          <select
+            class="form-control"
+            id="select-continent"
+            name="select"
+            [(ngModel)]="selectedContinent"
+          >
+            <option value="null">Select Continent</option>
+            <option value="Africa">Africa</option>
+            <option value="Europe">Europe</option>
+            <option value="Asia">Asia</option>
+            <option value="America">America</option>
+          </select>
+        </label>
+
+        <label class="mb-3"
+          >Select City
+          <select
+            class="form-control"
+            id="select-continent"
+            name="select"
+            [(ngModel)]="selectedCity"
+          >
+            <option value="null">Select City</option>
+            <option value="Accra">Accra</option>
+            <option value="Lagos">Lagos</option>
+            <option value="Harare">Harare</option>
+            <option value="Maputo">Maputo</option>
+          </select>
+        </label>
+      </div>
+      {{ selectedContinent }}
+      {{ selectedCity }}
+      <button class="btn btn-primary" (click) = "getCountryData(selectedContinent, selectedCity)">
+        Get Weather Info
+      </button>
+    </form>
+    <div class="mt-2">
+      <ul class="pagination">
+        <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+        <li class="page-item"><a class="page-link" href="#">1</a></li>
+        <li class="page-item"><a class="page-link" href="#">2</a></li>
+        <li class="page-item"><a class="page-link" href="#">3</a></li>
+        <li class="page-item"><a class="page-link" href="#">Next</a></li>
+      </ul>
+    </div>
+  </div>
+</div>
